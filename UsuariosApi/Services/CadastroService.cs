@@ -57,11 +57,7 @@ namespace UsuariosApi.Services
                 .FirstOrDefault(u => u.Id == request.UsuarioId);
             var identityResult = _userManager
                 .ConfirmEmailAsync(identityUser, request.CodigoDeAtivacao).Result;
-            if (identityResult.Succeeded)
-            {
-                return Result.Ok();
-            }
-            return Result.Fail("Falha ao ativar conta de usuário");
+            return identityResult.Succeeded ? Result.Ok() : Result.Fail("Falha ao ativar conta de usuário");
         }
     }
 }

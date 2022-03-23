@@ -15,7 +15,7 @@ namespace UsuariosApi.Services
     {
         public Token CreateToken(IdentityUser<int> usuario)
         {
-            Claim[] direitosUsuario = new Claim[]
+            Claim[] direitosUsuario = 
             {
                 new Claim("username", usuario.UserName),
                 new Claim("id", usuario.Id.ToString())
