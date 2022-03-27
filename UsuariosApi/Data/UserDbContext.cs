@@ -7,6 +7,7 @@ namespace UsuariosApi.Data
     public class UserDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>
     {
 
+        // Definição do UserDbContext
         public UserDbContext(DbContextOptions<UserDbContext> opt) : base(opt)
         {
 

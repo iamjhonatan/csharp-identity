@@ -22,12 +22,7 @@ namespace UsuariosApi.Services
         {
             Task resultadoIdentity = _signInManager.SignOutAsync();
 
-            if (resultadoIdentity.IsCompletedSuccessfully)
-            {
-                return Result.Ok();
-            }            
-            return Result.Fail("Logout falhou");
-
+            return resultadoIdentity.IsCompletedSuccessfully ? Result.Ok() : Result.Fail("Logout falhou");
         }
     }
 }

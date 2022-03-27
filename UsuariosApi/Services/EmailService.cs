@@ -30,26 +30,24 @@ namespace UsuariosApi.Services
 
         private void Enviar(MimeMessage mensagemDeEmail)
         {
-            using (var client = new SmtpClient())
+            using var client = new SmtpClient();
+            try
             {
-                try
-                {
-                    client.Connect(_configuration.GetValue<string>("EmailSettings:SmtpServer"),
-                        _configuration.GetValue<int>("EmailSettings:Port"), true);
-                    client.AuthenticationMechanisms.Remove("XOUATH2");
-                    client.Authenticate(_configuration.GetValue<string>("EmailSettings:From"),
-                        _configuration.GetValue<string>("EmailSettings:Password"));
-                    client.Send(mensagemDeEmail);
-                }
-                catch
-                {
-                    throw;
-                }
-                finally
-                {
-                    client.Disconnect(true);
-                    client.Dispose();
-                }
+                client.Connect(_configuration.GetValue<string>("EmailSettings:SmtpServer"),
+                    _configuration.GetValue<int>("EmailSettings:Port"), true);
+                client.AuthenticationMechanisms.Remove("XOUATH2");
+                client.Authenticate(_configuration.GetValue<string>("EmailSettings:From"),
+                    _configuration.GetValue<string>("EmailSettings:Password"));
+                client.Send(mensagemDeEmail);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                client.Disconnect(true);
+                client.Dispose();
             }
         }
 

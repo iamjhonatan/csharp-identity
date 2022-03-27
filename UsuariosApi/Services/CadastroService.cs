@@ -17,6 +17,7 @@ namespace UsuariosApi.Services
     {
 
         private IMapper _mapper;
+        // UserManager cadastra o usuário recebido
         private UserManager<IdentityUser<int>> _userManager;
         private EmailService _emailService;
 
